@@ -6,6 +6,7 @@
 #
 
 library(shiny)
+library(shinyRGL)
 
 shinyUI(fluidPage(
 
@@ -15,16 +16,19 @@ shinyUI(fluidPage(
   # Sidebar with a slider input for number of bins
   sidebarLayout(
     sidebarPanel(
-      sliderInput("bins",
-                  "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+      h3("Input Parameters"),
+      numericInput("reps", "Reps", min = 1, max = 10, value = 5),
+      sliderInput("sigma", "Sigma", min = 0.01, max = 2, value = 0.05, step = 0.01),
+      sliderInput("mu", "Mean", min = 0, max = 10, value = 5),
+      sliderInput("alpha", "alpha", min = -2, max = 2, value = 0, step = 0.05),
+      sliderInput("beta", "beta", min = -2, max = 2, value = 0, step = 0.05),
+      sliderInput("alpha.beta", "Interaction (alpha.beta)", 
+                  min = -1, max = 1, value = 0, step = 0.05)
     ),
 
     # Show a plot of the generated distribution
     mainPanel(
-      plotOutput("distPlot")
+      webGLOutput("perspPlot", width = "100%", height = 600)
     )
   )
 ))
