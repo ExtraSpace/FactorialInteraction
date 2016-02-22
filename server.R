@@ -6,14 +6,13 @@
 #
 
 library(shiny)
-library(shinyRGL)
-library(rgl)
 
 shinyServer(function(input, output) {
+
+  output$perspPlot <- renderPlot({
     
     rootreps = 5; reps = rootreps ^ 2;
     
-    output$perspPlot <- renderWebGL({
     # Creating Data for plotting using given replicates
     x1 <- rep(c(-1, -1, 1, 1), each = reps)
     x2 <- rep(c(-1, 1, -1, 1), each = reps)
@@ -43,9 +42,9 @@ shinyServer(function(input, output) {
     
     # Prespective Plot
     z1 <- seq(0, 1, 1 / (2 * rootreps - 1))
-    
-      persp3d(z1, z1, ymat, expand = 0.5, col = "green", 
-            xlab = "A", ylab = "B", zlab = "y",
-            ticktype = "detailed", nticks = 2, zlim = c(3,7))
+    persp(z1, z1, ymat, expand = 0.5, col = "green", 
+          xlab = "A", ylab = "B", zlab = "y",
+          ticktype = "detailed", nticks = 2, zlim = c(3,7),
+          theta = input$theta, phi = input$phi)
   })
 })
