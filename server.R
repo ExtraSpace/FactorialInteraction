@@ -4,10 +4,8 @@
 #
 # http://shiny.rstudio.com
 #
-
-library(shiny)
-library(shinyRGL)
-library(rgl)
+pkg.req <- c("shiny", "shinyRGL", "rgl")
+for (pkg in pkg.req) require(pkg, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
 
 shinyServer(function(input, output) {
     
