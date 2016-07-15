@@ -4,6 +4,8 @@
 #
 # http://shiny.rstudio.com
 #
+options(rgl.useNULL = TRUE)
+
 pkg.req <- c("shiny", "shinyRGL", "rgl")
 for (pkg in pkg.req) require(pkg, character.only = TRUE, quietly = TRUE, warn.conflicts = FALSE)
 
